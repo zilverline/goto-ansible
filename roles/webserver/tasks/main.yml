@@ -1,0 +1,9 @@
+---
+- name: install apache
+  apt: pkg=apache2 state=latest update_cache=true cache_valid_time=3600
+
+- name: copy default page
+  template: src=index.html.j2 dest=/var/www/html/index.html
+
+- name: start apache
+  service: name=apache2 state=started

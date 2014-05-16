@@ -1,0 +1,12 @@
+---
+- name: install haproxy
+  apt: pkg=haproxy state=latest update_cache=true cache_valid_time=3600
+
+- name: enable haproxy to start
+  copy: src=haproxy dest=/etc/default/haproxy owner=root group=root mode=0644
+  notify: restart haproxy
+
+- name: configure haproxy
+  template: src=haproxy.cfg.j2 dest=/etc/haproxy/haproxy.cfg
+    owner=root group=root mode=0644
+  notify: restart haproxy
