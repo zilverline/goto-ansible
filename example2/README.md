@@ -7,7 +7,12 @@
 * configure mac os x docker client
   export DOCKER_HOST=tcp://localhost:4243
 * provision the machines
-  ansible-playbook -i hosts -u root --private-key zilverline.key goto.yml
+  ansible-playbook -i hosts zilverline.key setup.yml
+* limit
+  ansible-playbook -i hosts setup.yml --limit webserver*
+
+* rolling update
+  ansible-playbook -i hosts update.yml
 
 ## Other
 

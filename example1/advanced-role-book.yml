@@ -15,4 +15,4 @@
   roles:
     - simple
     - advanced
-    - {role: optional, when: include_optional_role }
+    - {role: optional, my_var: foo, when: include_optional_role }

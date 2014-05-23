@@ -1,5 +1,10 @@
 <html>
+    <head>
+      <link href="css/main.css" type="text/css" rel="stylesheet">
+    </head>
     <body>
-      <h1>{{ ansible_all_ipv4_addresses[0] }}</h1>
+      <div id="container">
+        {{ ansible_all_ipv4_addresses[0] }}
+      </div>
     </body>
 </html>

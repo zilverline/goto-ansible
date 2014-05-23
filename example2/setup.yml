@@ -1,8 +1,12 @@
 ---
+- hosts: all
+  roles:
+    - common
+
 - hosts: webservers
   roles:
     - webserver
 
 - hosts: loadbalancer
   roles:
-  - loadbalancer
+    - loadbalancer

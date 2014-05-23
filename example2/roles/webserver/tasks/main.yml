@@ -1,9 +1,16 @@
 ---
 - name: install apache
   apt: pkg=apache2 state=latest update_cache=true cache_valid_time=3600
+  notify: restart apache
 
 - name: copy default page
   template: src=index.html.j2 dest=/var/www/html/index.html
+  tags: html
 
-- name: start apache
-  service: name=apache2 state=started
+- name: make css dir
+  file: path=/var/www/html/css state=directory
+  tags: html
+
+- name: copy css file
+  template: src=main.css.j2 dest=/var/www/html/css/main.css
+  tags: html

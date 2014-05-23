@@ -23,7 +23,7 @@
     - register
     - group vars
     - host vars
-  * tags
+  * tags (-t one,two --skip-tags three)
   * conditionals
   * handlers
 * custom modules..
