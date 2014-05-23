@@ -7,6 +7,6 @@
   roles:
     - webserver
 
-- hosts: loadbalancer
+- hosts: loadbalancers
   roles:
     - loadbalancer

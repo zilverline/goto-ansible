@@ -3,7 +3,7 @@ webserver1 ansible_ssh_port=2201
 webserver2 ansible_ssh_port=2202
 webserver3 ansible_ssh_port=2203
 
-[loadbalancer]
+[loadbalancers]
 loadbalancer ansible_ssh_port=2200
 
 [servers]

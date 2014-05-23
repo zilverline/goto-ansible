@@ -1,4 +1,14 @@
 ---
 
-- name: install git
-  apt: pkg=git update_cache=false state=present
+- name: install ntp
+  apt: pkg=ntp update_cache=false state=present
+  tags: ntp
+
+- name: Configure ntp file
+  template: src=ntp.conf.j2 dest=/etc/ntp.conf
+  tags: ntp
+  notify: restart ntp
+
+- name: Start the ntp service
+  service: name=ntp state=started enabled=true
+  tags: ntp

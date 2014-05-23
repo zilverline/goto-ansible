@@ -1,6 +1,9 @@
 ---
 - name: install haproxy
-  apt: pkg=haproxy state=latest update_cache=true cache_valid_time=3600
+  apt: pkg={{ item }} state=present update_cache=true cache_valid_time=3600
+  with_items:
+    - haproxy
+    - socat
 
 - name: enable haproxy to start
   copy: src=haproxy dest=/etc/default/haproxy owner=root group=root mode=0644

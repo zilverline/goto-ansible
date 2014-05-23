@@ -8,11 +8,11 @@
   export DOCKER_HOST=tcp://localhost:4243
 * provision the machines
   ansible-playbook -i hosts zilverline.key setup.yml
-* limit
-  ansible-playbook -i hosts setup.yml --limit webserver*
 
 * rolling update
   ansible-playbook -i hosts update.yml
+
+http://192.168.10.10:8800/haproxy?stats=true
 
 ## Other
 

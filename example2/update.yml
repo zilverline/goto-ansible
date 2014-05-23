@@ -1,1 +1,19 @@
-- hosts:
+---
+- hosts: loadbalancers
+  tasks: []
+
+- hosts: webservers
+  serial: 1
+  tasks:
+    - name: disable the server in lb
+      shell: echo "disable server goto_app/{{ ansible_hostname }}" | socat stdio /var/lib/haproxy/stats
+      delegate_to: "{{ item }}"
+      with_items: groups.loadbalancers
+
+    - name: sleep 5 sec
+      command: /bin/sleep 5
+
+    - name: enable the server in lb
+      shell: echo "enable server goto_app/{{ ansible_hostname }}" | socat stdio /var/lib/haproxy/stats
+      delegate_to: "{{ item }}"
+      with_items: groups.loadbalancers
