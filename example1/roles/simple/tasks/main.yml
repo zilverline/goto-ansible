@@ -1,0 +1,4 @@
+---
+- name: copy a file
+  copy: src=file dest=/tmp/file
+  tags: simple

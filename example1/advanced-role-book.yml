@@ -1,0 +1,18 @@
+---
+- hosts: all
+  vars:
+    username: mike
+  vars_prompt:
+    - name: second_username
+      prompt: "username"
+      private: no
+    - name: password
+      prompt: "Your password please"
+      private: yes
+  vars_files:
+    - vars/vars.yml
+    - vars/{{ ansible_os_family }}.yml
+  roles:
+    - simple
+    - advanced
+    - {role: optional, when: include_optional_role }

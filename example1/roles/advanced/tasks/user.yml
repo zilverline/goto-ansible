@@ -1,0 +1,4 @@
+---
+- name: Create a user {{ username }}
+  user: name={{ username }} comment="Joop" shell=/bin/bash groups=adm
+  sudo: true

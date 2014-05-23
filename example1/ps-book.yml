@@ -1,0 +1,9 @@
+---
+- hosts: all
+  tasks:
+    - name: show processes
+      command: ps -fu vagrant
+      register: output
+
+    - name: debugging output
+      debug: var=output

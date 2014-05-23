@@ -1,0 +1,5 @@
+---
+- hosts: all
+  tasks:
+    - name: copy some file
+      copy: src=README.md dest=/tmp/README.md owner=vagrant group=vagrant mode=0664
