@@ -1,3 +1,0 @@
----
-- name: install version {{ version }}
-  command: echo "install {{ version }}"

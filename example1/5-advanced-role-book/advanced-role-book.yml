@@ -1,0 +1,13 @@
+---
+- hosts: all
+  vars:
+    vars_username: john
+  vars_prompt:
+    - name: prompt_username
+      prompt: "username"
+      private: no
+  vars_files:
+    - vars/{{ ansible_os_family }}.yml
+  roles:
+    - advanced
+    - { role: optional, my_var: foo, when: include_optional_role }

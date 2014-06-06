@@ -1,9 +1,9 @@
 ---
 - hosts: all
   vars:
-    my_var: Joop
+    my_var: GOTO Amsterdam
     other_vars:
-      - { key: foo, value: bar }
+      - { key: snowflakes, value: melted }
   tasks:
     - name: copy a template
       template: src=templates/template.j2 dest=/tmp/template owner=vagrant group=vagrant mode=0664

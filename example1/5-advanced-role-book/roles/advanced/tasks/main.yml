@@ -1,0 +1,8 @@
+---
+- include: user.yml username={{ vars_username }}
+- include: user.yml username={{ var_file_username }}
+- include: user.yml username={{ prompt_username }}
+
+- name: copy template and restart ssh
+  template: src=template.j2 dest=/tmp/template
+  notify: restart ssh

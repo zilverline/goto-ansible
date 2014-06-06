@@ -1,0 +1,3 @@
+---
+- name: install with {{ dependency_var }}
+  command: echo "install {{ dependency_var }}"
