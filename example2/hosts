@@ -2,15 +2,16 @@
 webserver1 ansible_ssh_port=2201
 webserver2 ansible_ssh_port=2202
 webserver3 ansible_ssh_port=2203
+webserver4 ansible_ssh_port=2204
+webserver5 ansible_ssh_port=2205
+webserver6 ansible_ssh_port=2206
 
 [loadbalancers]
 loadbalancer ansible_ssh_port=2200
 
-[servers]
-webserver1
-webserver2
-webserver3
-loadbalancer
+[servers:children]
+webservers
+loadbalancers
 
 [servers:vars]
 ansible_ssh_host=192.168.10.10

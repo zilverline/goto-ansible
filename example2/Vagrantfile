@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
   #  a.limit = "all"
   #end
 
-  (1..3).each do |i|
+  (1..6).each do |i|
     config.vm.define "web#{i}" do |c|
       c.vm.network :forwarded_port, guest: 22, host: 2200 + i, auto_correct: false, id: "ssh"
     end
