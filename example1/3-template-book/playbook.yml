@@ -6,4 +6,4 @@
       - { key: snowflakes, value: melted }
   tasks:
     - name: copy a template
-      template: src=templates/template.j2 dest=/tmp/template owner=vagrant group=vagrant mode=0664
+      template: src=template.j2 dest=/tmp/template owner=vagrant group=vagrant mode=0664

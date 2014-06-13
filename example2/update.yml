@@ -10,13 +10,13 @@
       delegate_to: "{{ item }}"
       with_items: groups.loadbalancers
 
-    - name: sleep 1 sec
-      command: /bin/sleep 1
+    - name: sleep 2 sec
+      command: /bin/sleep 2
 
     - name: replace index.html
       template: src=files/index.html.j2 dest=/var/www/html/index.html
 
-    - name: copy image
+   - name: copy image
       copy: src=files/pizza.gif dest=/var/www/html/
 
     - name: enable the server in lb

@@ -34,20 +34,28 @@
   vim Vagrantfile
   vagrant up
   ping 192.168.10.10
-  cat hosts
+
+  j 1-ps-book
+  vim hosts
   ansible -i hosts all -m ping
   ansible -i hosts all -m setup
   ansible -i hosts all -m command -a "ps -fu vagrant"
-  j 1-ps-book
-  vim ps-book.yml
-  ansible-playbook -i hosts ps-book.yml
+  vim playbook.yml
+  ansible-playbook -i hosts playbook.yml
+
   j 2-copy-book
-  ansible-playbook -i hosts copy-book.yml
-  ansible-playbook -i hosts copy-book.yml
+  ansible-playbook -i hosts playbook.yml
+  ansible-playbook -i hosts playbook.yml
   ansible -i hosts all -m command -a "ls /tmp"
-  ansible-playbook -i hosts template-book.yml
+
+  j 3-template-book
+  ansible-playbook -i hosts playbook.yml
   ansible -i hosts all -m command -a "cat /tmp/template"
-  vim simple-role-book.yml
-  ansible-playbook -i hosts simple-role-book.yml
-  ansible-playbook -i hosts advanced-role-book.yml
-  ansible-playbook -i hosts advanced-role-book.yml -t advanced -e ""
+
+  j 4-copy-role-book
+  vim playbook.yml
+  ansible-playbook -i hosts playbook.yml
+
+  j 5-advanced-role-book
+  ansible-playbook -i hosts playbook.yml
+  ansible-playbook -i hosts playbook.yml -t advanced -e ""
