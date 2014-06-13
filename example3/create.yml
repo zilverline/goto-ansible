@@ -1,0 +1,53 @@
+---
+- name: Build Rackspace infrastructure
+  hosts: localhost
+  gather_facts: False
+  vars:
+    initial_public_key: ~/.ssh/id_rsa.pub
+    rackspace_image: a4286a42-137c-46ce-a796-dbd2b12a078c # ubuntu 12.04
+    rackspace_flavor: 2 # 512mb | 20G | 1 cpu
+    number_of_webservers: 2
+  tasks:
+    - name: Create loadbalancer
+      local_action:
+        module: rax_clb
+        credentials: "{{ rackspace_credentials }}"
+        name: loadbalancer
+        algorithm: ROUND_ROBIN
+        timeout: 30
+        region: "{{ region }}"
+        state: present
+        wait: yes
+        meta:
+          app: goto-app
+      register: clb
+
+    - name: Create webservers
+      local_action:
+        module: rax
+        name: webserver%02d
+        group: goto
+        flavor: "{{ rackspace_flavor }}"
+        image: "{{ rackspace_image }}"
+        credentials: "{{ rackspace_credentials }}"
+        region: "{{ region }}"
+        state: present
+        exact_count: yes
+        count: "{{ number_of_webservers }}"
+        wait: yes
+        files:
+          /root/.ssh/authorized_keys: "{{ initial_public_key }}"
+      register: rax
+
+    - name: Add servers to Load balancer
+      local_action:
+        module: rax_clb_nodes
+        credentials: "{{ rackspace_credentials }}"
+        load_balancer_id: "{{ clb.balancer.id }}"
+        address: "{{ item.rax_networks.private|first }}"
+        condition: enabled
+        type: primary
+        wait: yes
+        region: "{{ region }}"
+      with_items: rax.success
+      when: rax.action == 'create'

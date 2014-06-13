@@ -1,0 +1,23 @@
+---
+- name: Destroy Rackspace infrastructure
+  hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: Destroy webservers
+      local_action:
+        module: rax
+        instance_ids: [ "{{ hostvars[item].rax_id }}" ]
+        region: "{{ region }}"
+        credentials: "{{ rackspace_credentials }}"
+        state: absent
+        wait: yes
+      with_items: groups['goto']
+
+    - name: Destroy loadbalancer
+      local_action:
+        module: rax_clb
+        name: loadbalancer
+        region: "{{ region }}"
+        credentials: "{{ rackspace_credentials }}"
+        state: absent
+        wait: yes
