@@ -1,10 +1,13 @@
-Vagrant.require_version ">= 1.6.3"
+Vagrant.require_version ">= 1.6.0"
 
-Vagrant.configure("2") do |config|
+VAGRANT_API_VERSION = '2'
+
+Vagrant.configure(VAGRANT_API_VERSION) do |config|
 
   config.ssh.username = "root"
   config.ssh.private_key_path = "zilverline.key"
   config.ssh.port = 22
+  config.vm.synced_folder ".", "/vagrant", disabled: true
 
   config.vm.provider :docker do |d|
     d.image = "zilverline/baseimage"
@@ -13,19 +16,13 @@ Vagrant.configure("2") do |config|
     d.vagrant_vagrantfile = "./docker/Vagrantfile"
   end
 
-  #config.vm.provision :ansible do |a|
-  #  a.playbook = "setup.yml"
-  #  a.inventory_path = "hosts"
-  #  a.limit = "all"
-  #end
-
   (1..6).each do |i|
-    config.vm.define "web#{i}" do |c|
+    config.vm.define "webserver#{i}" do |c|
       c.vm.network :forwarded_port, guest: 22, host: 2200 + i, auto_correct: false, id: "ssh"
     end
   end
 
-  config.vm.define "lb" do |l|
+  config.vm.define "loadbalancer" do |l|
     l.vm.network :forwarded_port, guest: 22, host: 2200, auto_correct: false, id: "ssh"
     l.vm.network :forwarded_port, guest: 80, host: 8800, auto_correct: false
   end

@@ -1,11 +1,9 @@
 <html>
     <head>
       <meta http-equiv="pragma" content="no-cache">
-      <meta http-equiv="expires" Content="0">
-      <meta http-equiv="refresh" Content="2">
       <link href="css/main.css" type="text/css" rel="stylesheet">
     </head>
-    <body>
+    <body style="background-color: {{ color }}">
       <div id="container">
         {{ ansible_all_ipv4_addresses[0] }}
       </div>

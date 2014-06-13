@@ -10,8 +10,14 @@
       delegate_to: "{{ item }}"
       with_items: groups.loadbalancers
 
-    - name: sleep 5 sec
-      command: /bin/sleep 5
+    - name: sleep 1 sec
+      command: /bin/sleep 1
+
+    - name: replace index.html
+      template: src=files/index.html.j2 dest=/var/www/html/index.html
+
+    - name: copy image
+      copy: src=files/pizza.gif dest=/var/www/html/
 
     - name: enable the server in lb
       shell: echo "enable server goto_app/{{ ansible_hostname }}" | socat stdio /var/lib/haproxy/stats

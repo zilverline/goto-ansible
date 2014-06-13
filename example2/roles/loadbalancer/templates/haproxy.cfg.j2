@@ -26,5 +26,5 @@ listen goto_app 0.0.0.0:80
    option httpclose
    option forwardfor
 {% for host in groups['webservers'] %}
-   server {{ hostvars[host].ansible_hostname }} {{ hostvars[host]['ansible_default_ipv4']['address'] }}:80 check
+   server {{ hostvars[host].ansible_hostname }} {{ hostvars[host].ansible_default_ipv4.address }}:80 check
 {% endfor %}
