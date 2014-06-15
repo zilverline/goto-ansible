@@ -39,6 +39,7 @@
   vim hosts
   ansible -i hosts all -m ping
   ansible -i hosts all -m setup
+  ansible-doc command
   ansible -i hosts all -m command -a "ps -fu vagrant"
   vim playbook.yml
   ansible-playbook -i hosts playbook.yml

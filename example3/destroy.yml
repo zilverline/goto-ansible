@@ -11,7 +11,7 @@
         credentials: "{{ rackspace_credentials }}"
         state: absent
         wait: yes
-      with_items: groups['goto']
+      with_items: groups['webservers']
 
     - name: Destroy loadbalancer
       local_action:

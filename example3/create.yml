@@ -18,15 +18,13 @@
         region: "{{ region }}"
         state: present
         wait: yes
-        meta:
-          app: goto-app
       register: clb
 
     - name: Create webservers
       local_action:
         module: rax
         name: webserver%02d
-        group: goto
+        group: webservers
         flavor: "{{ rackspace_flavor }}"
         image: "{{ rackspace_image }}"
         credentials: "{{ rackspace_credentials }}"
@@ -45,6 +43,7 @@
         credentials: "{{ rackspace_credentials }}"
         load_balancer_id: "{{ clb.balancer.id }}"
         address: "{{ item.rax_networks.private|first }}"
+        port: 80
         condition: enabled
         type: primary
         wait: yes

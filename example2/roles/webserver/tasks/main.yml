@@ -1,16 +1,18 @@
 ---
 - name: install apache
-  apt: pkg=apache2 state=latest update_cache=true cache_valid_time=3600
-  notify: restart apache
+  apt: pkg=apache2 state=latest update_cache=false cache_valid_time=3600
 
 - name: copy default page
-  template: src=index.html.j2 dest=/var/www/html/index.html
+  template: src=index.html.j2 dest={{ html_root }}/index.html
   tags: html
+  notify: restart apache
 
 - name: make css dir
-  file: path=/var/www/html/css state=directory
+  file: path={{ html_root }}/css state=directory
   tags: html
+  notify: restart apache
 
 - name: copy css file
-  template: src=main.css.j2 dest=/var/www/html/css/main.css
+  template: src=main.css.j2 dest={{ html_root }}/css/main.css
   tags: html
+  notify: restart apache

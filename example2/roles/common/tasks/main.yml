@@ -1,7 +1,7 @@
 ---
 
 - name: install ntp
-  apt: pkg=ntp update_cache=false state=present
+  apt: pkg=ntp update_cache=true state=present
   tags: ntp
 
 - name: Configure ntp file
