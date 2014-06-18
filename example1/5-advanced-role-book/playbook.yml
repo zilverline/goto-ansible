@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: goto
   vars:
     vars_username: john
   vars_prompt:

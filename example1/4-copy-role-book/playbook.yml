@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: goto
   gather_facts: False
   roles:
     - simple

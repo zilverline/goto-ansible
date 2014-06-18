@@ -33,7 +33,7 @@
 
   vim Vagrantfile
   vagrant up
-  ping 192.168.10.10
+  ping 192.168.10.11
 
   j 1-ps-book
   vim hosts
@@ -59,4 +59,3 @@
 
   j 5-advanced-role-book
   ansible-playbook -i hosts playbook.yml
-  ansible-playbook -i hosts playbook.yml -t advanced -e ""
